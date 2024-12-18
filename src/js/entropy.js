@@ -282,7 +282,7 @@ window.Entropy = new (function () {
 		}
 		var cardMatches = matchers.card(str);
 		if (
-			(cardMatches.length >= hexMatches.length / 2 && autodetect) ||
+			(cardMatches.length == str.length && autodetect) ||
 			baseStr === "card"
 		) {
 			return {
@@ -362,13 +362,13 @@ window.Entropy = new (function () {
 				str: "hexadecimal",
 			};
 		}
-		var ints = hexMatches.map((i) => parseInt(i, 16));
+		var ints = hexMatches.map((i) => i.codePointAt(0));
 		return {
 			ints: ints,
 			events: str.split(""),
 			matcher: matchers.text,
 			asInt: 16,
-			bitsPerEvent: 4,
+			bitsPerEvent: 8,
 			str: "text",
 		};
 	}
